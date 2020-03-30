@@ -6,11 +6,11 @@ const NavItems = ({ clicked, mobile }) => {
   return (
     <Nav>
       <UI mobile={mobile}>
-        <NavItem clicked={clicked} mobile={mobile} link="/todos">
-          Todo
+        <NavItem clicked={clicked} mobile={mobile} link="/register">
+          Register
         </NavItem>
-        <NavItem clicked={clicked} mobile={mobile} link="/profile">
-          Account
+        <NavItem clicked={clicked} mobile={mobile} link="/login">
+          Login
         </NavItem>
         <NavItem clicked={clicked} mobile={mobile} link="/logout">
           Logout
