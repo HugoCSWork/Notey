@@ -3,9 +3,6 @@ import styled from "styled-components";
 
 import Navbar from "../components/Navbar/Navbar";
 import SideDrawer from "../components/SideDrawer/SideDrawer";
-import Footer from "../components/Footer/Footer";
-// import SideDrawer from "../components/Navigation/SideDrawer/SideDrawer";
-// import Navbar from "../components/Navigation/Navbar/Navbar";
 
 const MainWrapper = styled.main`
   width: 100%;
