@@ -1,0 +1,16 @@
+import React from "react";
+import { LogoWrapper, StyledNavLink } from "./Logo.styled";
+
+/**
+ * Logo For The Navbar
+ * @todo Create a proper logo for the app.
+ */
+const Logo = () => {
+  return (
+    <LogoWrapper>
+      <StyledNavLink to="/">Notey</StyledNavLink>
+    </LogoWrapper>
+  );
+};
+
+export default Logo;
