@@ -4,10 +4,10 @@
 const theme = {
   colors: {
     main: "#E5E7E6",
-    mainDark: "#DA627D",
-    mainDarker: "#FFA5AB",
-    mainLight: "#A53860",
-    mainLighter: "#FFA5AB",
+    mainDark: "#248232",
+    mainDarker: "#2BA84A",
+    mainLight: "#2BA84A",
+    mainLighter: "#2BA84A",
     textColor: "#333",
     whiteColor: "#FFFFFF",
     errorRed: "#ff5757",

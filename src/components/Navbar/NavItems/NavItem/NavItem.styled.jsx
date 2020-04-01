@@ -9,27 +9,23 @@ export const StyledNavLink = styled(NavLink)`
   display: flex;
   text-transform: uppercase;
   align-items: center;
-  border-bottom: ${props =>
-    props.mobile ? " 1px solid transparent" : "2px solid transparent"};
+  border-bottom: ${({ mobile }) =>
+    mobile ? " 1px solid transparent" : "2px solid transparent"};
   font-size: 1.2rem;
   padding: 1rem;
-  margin: ${props => (props.mobile ? " 1rem 0 " : "0 1rem")};
+  margin: ${({ mobile }) => (mobile ? " 1rem 0 " : "0 1rem")};
   font-weight: 400px;
   color: var(--color-white);
   transition: all 0.2s;
 
   &:hover {
-    border-bottom: ${props =>
-      props.mobile
-        ? "1px solid var(--color-white)"
-        : "2px solid var(--color-white)"};
+    border-bottom: ${({ mobile }) =>
+      mobile ? "1px solid var(--color-white)" : "2px solid var(--color-white)"};
   }
 
   &.active {
-    border-bottom: ${props =>
-      props.mobile
-        ? "1px solid var(--color-white)"
-        : "2px solid var(--color-white)"};
+    border-bottom: ${({ mobile }) =>
+      mobile ? "1px solid var(--color-white)" : "2px solid var(--color-white)"};
   }
 `;
 

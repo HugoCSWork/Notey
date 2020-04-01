@@ -2,18 +2,18 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Formik, Field } from "formik";
 import * as Yup from "yup";
-import styled from "styled-components";
 
-import { FormWrapper, StyledForm } from "../../../hoc/elements";
+import {
+  FormWrapper,
+  StyledForm,
+  MessageWrapper,
+  RedirectLinkWrapper
+} from "../../../hoc/elements";
 import * as actions from "../../../store/actions/index";
 import Input from "../../../components/UI/Input";
 import Button from "../../../components/UI/Button";
 import Heading from "../../../components/UI/Heading";
-
-const MessageWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-`;
+import Message from "../../../components/UI/Message";
 
 const RegisterSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -27,32 +27,38 @@ const RegisterSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid Email")
     .required("Email is Required"),
+  confirmEmail: Yup.string()
+    .required("You need to confirm your password")
+    .oneOf([Yup.ref("email"), null], "Emails must match"),
   password: Yup.string()
     .required("Password is Required")
     .min(8, "Password is too Short"),
   confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Password doesn't match")
+    .oneOf([Yup.ref("password"), null], "Passwords must match")
     .required("You need to confirm your Password")
 });
 
-const Register = ({ register, loading, error }) => {
+const Register = ({ register, loading, error, history, cleanUp }) => {
+  useEffect(() => {
+    return () => {
+      cleanUp();
+    };
+  }, [cleanUp]);
+
   return (
     <Formik
       initialValues={{
         firstName: "",
         lastName: "",
         email: "",
+        confirmEmail: "",
         password: "",
         confirmPassword: ""
       }}
       validationSchema={RegisterSchema}
-      onSubmit={async (values, { setSubmitting }) => {
+      onSubmit={async values => {
         await register(values);
-        console.log(error);
-        // setTimeout(() => {
-        //   setSubmitting(false);
-        //   console.log(error);
-        // }, 500);
+        console.log(loading, error);
       }}
     >
       {({ isSubmitting, isValid }) => (
@@ -79,13 +85,19 @@ const Register = ({ register, loading, error }) => {
             <Field
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder="Email Address"
+              component={Input}
+            />
+            <Field
+              type="email"
+              name="confirmEmail"
+              placeholder="Confirm Email Address"
               component={Input}
             />
             <Field
               type="password"
               name="password"
-              placeholder="Password.."
+              placeholder="Password"
               component={Input}
             />
             <Field
@@ -101,6 +113,14 @@ const Register = ({ register, loading, error }) => {
             >
               Sign up
             </Button>
+            <RedirectLinkWrapper onClick={() => history.push("/login")}>
+              Already have an account? Log in
+            </RedirectLinkWrapper>
+            <MessageWrapper>
+              <Message error show={error}>
+                {error}
+              </Message>
+            </MessageWrapper>
           </StyledForm>
         </FormWrapper>
       )}
@@ -114,7 +134,8 @@ const mapStateToProps = ({ auth }) => ({
 });
 
 const mapDispatchToProps = {
-  register: actions.register
+  register: actions.register,
+  cleanUp: actions.clean
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -35,3 +35,24 @@ export const StyledForm = styled(Form)`
   width: 100%;
   flex-direction: column;
 `;
+
+export const MessageWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+`;
+
+export const RedirectLinkWrapper = styled.div`
+  cursor: pointer;
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  color: var(--color-white);
+  transition: all 0.2s;
+  &:hover {
+    transform: translateY(-3px);
+  }
+  &:active {
+    transform: translateY(2px);
+  }
+`;

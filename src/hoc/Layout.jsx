@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
 import Navbar from "../components/Navbar/Navbar";
 import SideDrawer from "../components/SideDrawer/SideDrawer";
@@ -17,12 +18,18 @@ const MainWrapper = styled.main`
 /**
  * Layout for the App
  */
-const Layout = ({ children }) => (
+const Layout = ({ children, loggedIn }) => (
   <>
-    <Navbar />
-    <SideDrawer />
+    <Navbar loggedIn={loggedIn} />
+    <SideDrawer loggedIn={loggedIn} />
     <MainWrapper>{children}</MainWrapper>
   </>
 );
 
-export default Layout;
+const mapStateToProps = state => {
+  return {
+    loggedIn: state.firebase.auth
+  };
+};
+
+export default connect(mapStateToProps)(Layout);

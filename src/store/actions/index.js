@@ -1,1 +1,1 @@
-export { register } from "./authActions";
+export { register, login, verifyEmail, logout, clean } from "./authActions";

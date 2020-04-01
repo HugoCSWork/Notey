@@ -1,4 +1,11 @@
 export const AUTH_STARTED = "AUTH_STARTED";
 export const AUTH_SUCCESS = "AUTH_SUCCESS";
 export const AUTH_ERROR = "AUTH_ERROR";
-export const AUTH_ENDED = "AUTH_ENDED";
+
+export const VERIFY_EMAIL_STARTED = "VERIFY_EMAIL_STARTED";
+export const VERIFY_EMAIL_SUCCESS = "VERIFY_EMAIL_SUCCESS";
+export const VERIFY_EMAIL_FAILED = "VERIFY_EMAIL_FAILED";
+
+export const LOGOUT = "LOGOUT";
+
+export const CLEAN = "CLEAN";

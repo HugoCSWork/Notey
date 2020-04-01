@@ -9,7 +9,7 @@ export const FixedWrapper = styled.div`
   width: 100%;
   height: 6rem;
 
-  @media ${props => props.theme.mediaQueries.smallest} {
+  @media ${({ theme }) => theme.mediaQueries.smallest} {
     display: none;
   }
 `;

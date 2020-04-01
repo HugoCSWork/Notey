@@ -1,23 +1,41 @@
 import React from "react";
 import Layout from "./hoc//Layout";
 import { Route, Switch, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+
 import Register from "./containers/Auth/Register/Register";
 import {
   UserIsAuthenticated,
   UserIsNotAuthenticated
 } from "./containers/Auth/routes";
-
-const App = ({ email_verified }) => {
+import Login from "./containers/Auth/Login/Login";
+import Todo from "./containers/Todo/Todo";
+import VerifyEmail from "./containers/Auth/VerifyEmail/VerifyEmail";
+import Logout from "./containers/Auth/Logout/Logout";
+const App = ({ emailVerified }) => {
   return (
     <Layout>
       <Switch>
-        <Route path="/todos" component={UserIsNotAuthenticated(Register)} />
-        <Route path="/account" />
-        <Route path="/logout" />
+        <Route
+          exact
+          path="/"
+          component={
+            !emailVerified
+              ? UserIsAuthenticated(VerifyEmail)
+              : UserIsAuthenticated(Todo)
+          }
+        />
+        <Route path="/register" component={UserIsNotAuthenticated(Register)} />
+        <Route path="/login" component={UserIsNotAuthenticated(Login)} />
+        <Route path="/logout" component={UserIsAuthenticated(Logout)} />
         <Redirect to="/" />
       </Switch>
     </Layout>
   );
 };
 
-export default App;
+const mapStateToProps = ({ firebase }) => ({
+  emailVerified: firebase.auth.emailVerified
+});
+
+export default connect(mapStateToProps)(App);
