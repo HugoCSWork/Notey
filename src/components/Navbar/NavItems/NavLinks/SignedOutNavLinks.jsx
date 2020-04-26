@@ -1,8 +1,8 @@
 import React from "react";
-import NavItem from "./NavItem/NavItem";
-import { Nav, UI } from "./NavItems.styled";
+import NavItem from "../NavItem/NavItem";
+import { Nav, UI } from "../NavItems.styled";
 
-const NavItems = ({ clicked, mobile }) => {
+const SignedOutNavLinks = ({ clicked, mobile }) => {
   return (
     <Nav>
       <UI mobile={mobile}>
@@ -12,12 +12,9 @@ const NavItems = ({ clicked, mobile }) => {
         <NavItem clicked={clicked} mobile={mobile} link="/login">
           Login
         </NavItem>
-        <NavItem clicked={clicked} mobile={mobile} link="/logout">
-          Logout
-        </NavItem>
       </UI>
     </Nav>
   );
 };
 
-export default NavItems;
+export default SignedOutNavLinks;

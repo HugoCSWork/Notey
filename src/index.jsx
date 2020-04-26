@@ -10,7 +10,7 @@ import GlobalStyles from "./utils/global";
 import theme from "./utils/theme";
 import store, { rrfProps } from "./store";
 import App from "./App";
-import Loader from "./components/UI/Loader";
+import Loader from "./components/UI/Loader/Loader";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -37,7 +37,9 @@ ReactDOM.render(
         <ThemeProvider theme={theme}>
           <>
             <GlobalStyles />
-            <App />
+            <AuthIsLoaded>
+              <App />
+            </AuthIsLoaded>
           </>
         </ThemeProvider>
       </BrowserRouter>

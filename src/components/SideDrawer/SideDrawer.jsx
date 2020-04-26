@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 import Logo from "../Navbar/Logo/Logo";
 import Hamburger from "./Hamburger/Hamburger";
-import NavItems from "../Navbar/NavItems/NavItems";
+import SignedOutNavLinks from "../Navbar/NavItems/NavLinks/SignedOutNavLinks";
+import SignedInNavLinks from "../Navbar/NavItems/NavLinks/SignedInNavLinks";
 import { FixedWrapper, Wrapper, Menu } from "./SideDrawer.styled";
 /**
  * Side drawer to move between pages in mobile layout
@@ -18,11 +19,19 @@ const SideDrawer = ({ loggedIn }) => {
         </Wrapper>
       </FixedWrapper>
       <Menu opened={isOpened}>
-        <NavItems
-          loggedIn={loggedIn}
-          mobile
-          clicked={() => setisOpened(false)}
-        />
+        {loggedIn.uid ? (
+          <SignedInNavLinks
+            loggedIn={loggedIn}
+            mobile
+            clicked={() => setisOpened(false)}
+          />
+        ) : (
+          <SignedOutNavLinks
+            loggedIn={loggedIn}
+            mobile
+            clicked={() => setisOpened(false)}
+          />
+        )}
       </Menu>
     </>
   );

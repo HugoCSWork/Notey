@@ -11,7 +11,7 @@ export const FixedWrapper = styled.header`
   height: 6rem;
   display: none;
 
-  @media ${props => props.theme.mediaQueries.smallest} {
+  @media ${({ theme }) => theme.mediaQueries.smallest} {
     display: flex;
   }
 `;
@@ -35,8 +35,8 @@ export const Menu = styled.div`
   margin-top: 6rem;
   z-index: 2;
   background-color: var(--color-mainDarker);
-  visibility: ${props => (props.opened ? "visibile" : "hidden")};
-  transform: translateY(${props => (props.opened ? "0%" : "-100%")});
+  visibility: ${({ opened }) => (opened ? "visibile" : "hidden")};
+  transform: translateY(${({ opened }) => (opened ? "0%" : "-100%")});
   transition: all 0.1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   display: none;
 

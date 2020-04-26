@@ -22,17 +22,17 @@ export const StyledHamb = styled.div`
     transition: 0.25s ease-in-out;
 
     &:nth-child(1) {
-      top: ${props => (props.opened ? "9px" : "0px")};
-      width: ${props => (props.opened ? "0%" : "100%")};
-      left: ${props => (props.opened ? "50%" : null)};
+      top: ${({ opened }) => (opened ? "9px" : "0px")};
+      width: ${({ opened }) => (opened ? "0%" : "100%")};
+      left: ${({ opened }) => (opened ? "50%" : null)};
     }
 
     &:nth-child(2) {
-      transform: ${props => (props.opened ? "rotate(45deg)" : null)};
+      transform: ${({ opened }) => (opened ? "rotate(45deg)" : null)};
     }
 
     &:nth-child(3) {
-      transform: ${props => (props.opened ? "rotate(-45deg)" : null)};
+      transform: ${({ opened }) => (opened ? "rotate(-45deg)" : null)};
     }
 
     &:nth-child(2),
@@ -41,9 +41,9 @@ export const StyledHamb = styled.div`
     }
 
     &:nth-child(4) {
-      top: ${props => (props.opened ? "9px" : "18px")};
-      width: ${props => (props.opened ? "0%" : "100%")};
-      left: ${props => (props.opened ? "50%" : null)};
+      top: ${({ opened }) => (opened ? "9px" : "18px")};
+      width: ${({ opened }) => (opened ? "0%" : "100%")};
+      left: ${({ opened }) => (opened ? "50%" : null)};
     }
   }
 `;
