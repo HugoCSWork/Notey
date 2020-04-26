@@ -33,10 +33,10 @@ const MessageWrapper = styled.div`
  * Yup schema for creating a to do item
  */
 const ReminderSchema = Yup.object().shape({
-  todo: Yup.string().required("The todo is required.")
+  reminder: Yup.string().required("This is required."),
 });
 
-const AddReminder = ({ opened, close, addItem, loading, error }) => {
+const AddReminder = ({ opened, close, addReminderToDB, loading, error }) => {
   return (
     <>
       <Modal opened={opened} close={close}>
@@ -45,26 +45,25 @@ const AddReminder = ({ opened, close, addItem, loading, error }) => {
         </Heading>
         <Formik
           initialValues={{
-            todo: ""
+            reminder: "",
           }}
           validationSchema={ReminderSchema}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
-            const response = await addItem(values);
-
+            console.log(loading);
+            const response = await addReminderToDB(values);
             setSubmitting(false);
             if (response) {
               close();
-              //Figure out why this closes to early sleeps are baaadddd
-              await new Promise(r => setTimeout(r, 100));
               resetForm();
             }
+            console.log(error);
           }}
         >
           {({ isSubmitting, isValid, resetForm }) => (
             <StyledForm>
               <Field
                 type="text"
-                name="todo"
+                name="reminder"
                 color="white"
                 textColor="green"
                 placeholder="Write your reminder..."
@@ -82,7 +81,7 @@ const AddReminder = ({ opened, close, addItem, loading, error }) => {
                 </Button>
               </ButtonsWrapper>
               <MessageWrapper>
-                <Message error show={error}>
+                <Message error show={true}>
                   {error}
                 </Message>
               </MessageWrapper>
@@ -94,13 +93,13 @@ const AddReminder = ({ opened, close, addItem, loading, error }) => {
   );
 };
 
-const mapStateToProps = ({ todos }) => ({
-  //   loading: todos.loading,
-  //   error: todos.error
+const mapStateToProps = ({ reminder }) => ({
+  loading: reminder.loading,
+  error: reminder.error,
 });
 
 const mapDispatchToProps = {
-  // addItem: actions.addItem
+  addReminderToDB: actions.addReminderToDB,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddReminder);

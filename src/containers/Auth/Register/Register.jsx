@@ -7,7 +7,7 @@ import {
   FormWrapper,
   StyledForm,
   MessageWrapper,
-  RedirectLinkWrapper
+  RedirectLinkWrapper,
 } from "../../../hoc/elements";
 import * as actions from "../../../store/actions/index";
 import Input from "../../../components/UI/Input/Input";
@@ -24,9 +24,7 @@ const RegisterSchema = Yup.object().shape({
     .required("Last Name is Required")
     .min(3, "Too Short")
     .max(25, "Too Long"),
-  email: Yup.string()
-    .email("Invalid Email")
-    .required("Email is Required"),
+  email: Yup.string().email("Invalid Email").required("Email is Required"),
   confirmEmail: Yup.string()
     .required("You need to confirm your password")
     .oneOf([Yup.ref("email"), null], "Emails must match"),
@@ -35,7 +33,7 @@ const RegisterSchema = Yup.object().shape({
     .min(8, "Password is too Short"),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("You need to confirm your Password")
+    .required("You need to confirm your Password"),
 });
 
 const Register = ({ register, loading, error, history, cleanUp }) => {
@@ -52,12 +50,11 @@ const Register = ({ register, loading, error, history, cleanUp }) => {
         email: "",
         confirmEmail: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
       }}
       validationSchema={RegisterSchema}
       onSubmit={async (values, { setSubmitting }) => {
         const val = await register(values);
-        console.log(val);
       }}
     >
       {({ isSubmitting, isValid }) => (
@@ -129,12 +126,12 @@ const Register = ({ register, loading, error, history, cleanUp }) => {
 
 const mapStateToProps = ({ auth }) => ({
   loading: auth.loading,
-  error: auth.error
+  error: auth.error,
 });
 
 const mapDispatchToProps = {
   register: actions.register,
-  cleanUp: actions.clean
+  cleanUp: actions.clean,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

@@ -16,10 +16,10 @@ const Notes = () => {
       <Container>
         <InnerWrapper>
           <Heading size="h1" bold>
-            Notes
+            Reminder
           </Heading>
           <Button color="mainDark" contain onClick={() => setIsAdding(true)}>
-            Add Item
+            Add reminder
           </Button>
           <AddReminder opened={isAdding} close={() => setIsAdding(false)} />
           {/* {content} */}
@@ -33,7 +33,7 @@ const mapStateToProps = ({ firebase, firestore }) => ({
   userId: firebase.auth.uid,
   notes: firestore.data.notes,
   requesting: firestore.status.requesting,
-  requested: firestore.status.requested
+  requested: firestore.status.requested,
 });
 
 const mapDispatchToProps = {};
