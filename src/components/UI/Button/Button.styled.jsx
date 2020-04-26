@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const StyledButton = styled.button`
+export const StyledButton = styled.button`
   width: ${({ contain }) => (contain ? "auto" : "100%")};
   outline: none;
   padding: 1.2rem 5rem;
@@ -37,22 +36,3 @@ const StyledButton = styled.button`
     background-color: #333;
   }
 `;
-
-/**
- *  Styled component for button
- * @param {boolean} disabled - Disables the button if has been clicked with invalid information till data is valid.
- */
-const Button = ({ children, disabled, loading, contain, color, ...rest }) => {
-  return (
-    <StyledButton
-      contain={contain}
-      color={color}
-      disabled={disabled || loading}
-      {...rest}
-    >
-      {loading ? loading : children}
-    </StyledButton>
-  );
-};
-
-export default Button;

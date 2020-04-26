@@ -4,9 +4,9 @@ import styled from "styled-components";
 import firebase from "firebase/app";
 
 import { FormWrapper, MessageWrapper } from "../../../hoc/elements";
-import Heading from "../../../components/UI/Heading";
-import Button from "../../../components/UI/Button";
-import Message from "../../../components/UI/Message";
+import Heading from "../../../components/UI/Heading/Heading";
+import Button from "../../../components/UI/Button/Button";
+import Message from "../../../components/UI/Message/Message";
 import * as actions from "../../../store/actions";
 
 const Wrapper = styled.div`

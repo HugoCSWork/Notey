@@ -1,7 +1,7 @@
 import React from "react";
 
-const Todo = () => {
+const Reminder = () => {
   return <div>Hello World</div>;
 };
 
-export default Todo;
+export default Reminder;

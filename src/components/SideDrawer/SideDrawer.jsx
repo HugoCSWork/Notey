@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import Logo from "../Navbar/Logo/Logo";
 import Hamburger from "./Hamburger/Hamburger";
-import SignedOutNavLinks from "../Navbar/NavItems/SignedOutNavLinks";
-import SignedInNavLinks from "../Navbar/NavItems/SignedInNavLinks";
+import SignedOutNavLinks from "../Navbar/NavItems/NavLinks/SignedOutNavLinks";
+import SignedInNavLinks from "../Navbar/NavItems/NavLinks/SignedInNavLinks";
 import { FixedWrapper, Wrapper, Menu } from "./SideDrawer.styled";
 /**
  * Side drawer to move between pages in mobile layout

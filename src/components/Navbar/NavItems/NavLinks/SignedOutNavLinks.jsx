@@ -1,6 +1,6 @@
 import React from "react";
-import NavItem from "./NavItem/NavItem";
-import { Nav, UI } from "./NavItems.styled";
+import NavItem from "../NavItem/NavItem";
+import { Nav, UI } from "../NavItems.styled";
 
 const SignedOutNavLinks = ({ clicked, mobile }) => {
   return (

@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const P = styled.p`
+export const P = styled.p`
   font-weight: 700;
   color: ${({ error, success }) => {
     if (error) return "var(--color-errorRed)";
@@ -14,13 +13,3 @@ const P = styled.p`
   transition: all 0.2s;
   margin-bottom: -15px;
 `;
-
-const Message = ({ children, error, success, show }) => {
-  return (
-    <P error={error} success={success} show={show}>
-      {children}
-    </P>
-  );
-};
-
-export default Message;

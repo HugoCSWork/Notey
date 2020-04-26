@@ -1,10 +1,9 @@
-import React from "react";
 import styled from "styled-components";
 
 /**
  * Wrapper for input box
  */
-const InputWrapper = styled.div`
+export const InputWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -19,7 +18,7 @@ const InputWrapper = styled.div`
 /**
  * Styling for error message
  */
-const Error = styled.div`
+export const Error = styled.div`
   color: var(--color-errorRed);
   visibility: ${({ show }) => (show ? "visible" : "hidden")};
   opacity: ${({ show }) => (show ? "1" : "0")};
@@ -36,35 +35,35 @@ const Error = styled.div`
 /**
  * Styling for input
  */
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   padding: 1rem 2rem;
   width: 100%;
-  background-color: var(--color-mainLight);
-  color: var(--color-white);
+  background-color: ${({ color }) => {
+    if (color === "white") {
+      return "var(--color-white)";
+    } else {
+      return "var(--color-mainLight);";
+    }
+  }};
+  color: ${({ textColor }) => {
+    if (textColor === "green") {
+      return "var(--color-mainLight)";
+    } else {
+      return "var(--color-white)";
+    }
+  }};
   font-weight: 500;
   font-size: 1.3rem;
   border: none;
   border-radius: 2rem;
 
   &::placeholder {
-    color: var(--color-white);
+    color: ${({ textColor }) => {
+      if (textColor === "green") {
+        return "var(--color-mainLight)";
+      } else {
+        return "var(--color-white)";
+      }
+    }};
   }
 `;
-
-/**
- *  Styled component for input
- * @param {field} - Passes through the properties needed to be able to work with formik.
- * @param {form: {touched, errors}} - Passes through the properties needed to be able to show the errors
- */
-const Input = ({ field, form: { touched, errors }, ...props }) => {
-  return (
-    <InputWrapper>
-      <StyledInput {...field} {...props} />
-      <Error show={errors[field.name] && touched[field.name]}>
-        {errors[field.name]}
-      </Error>
-    </InputWrapper>
-  );
-};
-
-export default Input;

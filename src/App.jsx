@@ -9,9 +9,10 @@ import {
   UserIsNotAuthenticated
 } from "./containers/Auth/routes";
 import Login from "./containers/Auth/Login/Login";
-import Todo from "./containers/Todo/Todo";
+import Reminder from "./containers/Reminder/Reminder";
 import VerifyEmail from "./containers/Auth/VerifyEmail/VerifyEmail";
 import Logout from "./containers/Auth/Logout/Logout";
+import Notes from "./containers/Notes/NotesList/Notes";
 const App = ({ emailVerified }) => {
   return (
     <Layout>
@@ -22,7 +23,16 @@ const App = ({ emailVerified }) => {
           component={
             !emailVerified
               ? UserIsAuthenticated(VerifyEmail)
-              : UserIsAuthenticated(Todo)
+              : UserIsAuthenticated(Reminder)
+          }
+        />
+        <Route
+          exact
+          path="/notes"
+          component={
+            !emailVerified
+              ? UserIsAuthenticated(VerifyEmail)
+              : UserIsAuthenticated(Notes)
           }
         />
         <Route path="/register" component={UserIsNotAuthenticated(Register)} />

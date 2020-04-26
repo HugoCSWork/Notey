@@ -9,10 +9,10 @@ import {
   MessageWrapper,
   RedirectLinkWrapper
 } from "../../../hoc/elements";
-import Heading from "../../../components/UI/Heading";
-import Input from "../../../components/UI/Input";
-import Message from "../../../components/UI/Message";
-import Button from "../../../components/UI/Button";
+import Heading from "../../../components/UI/Heading/Heading";
+import Input from "../../../components/UI/Input/Input";
+import Message from "../../../components/UI/Message/Message";
+import Button from "../../../components/UI/Button/Button";
 
 import * as actions from "../../../store/actions";
 
@@ -45,11 +45,8 @@ const Login = ({ login, loading, error, cleanUp, history }) => {
         password: ""
       }}
       validationSchema={LoginSchema}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          login(values);
-          setSubmitting(false);
-        }, 1000);
+      onSubmit={async (values, { setSubmitting }) => {
+        await login(values);
       }}
     >
       {({ isSubmitting, isValid }) => (
@@ -74,7 +71,7 @@ const Login = ({ login, loading, error, cleanUp, history }) => {
               component={Input}
             />
             <Button
-              disabled={!isValid || isSubmitting}
+              disabled={isSubmitting || !isValid}
               loading={loading ? "Logging in...." : null}
               type="submit"
             >

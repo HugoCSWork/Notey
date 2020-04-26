@@ -8,29 +8,28 @@ import * as actions from "./actionTypes";
  * @param {*} user
  * @todo: What happens if the user registers sucessfully but everything after blows up HUH YOU GUNNA JUST MAKE IT ANYWAY
  */
-export const register = user => async (dispatch, getState) => {
+export const register = (user) => async (dispatch, getState) => {
   dispatch({ type: actions.AUTH_STARTED });
-  await firebase
-    .auth()
-    .createUserWithEmailAndPassword(user.email, user.password)
-    .then(resp => {
-      db.collection("users")
-        .doc(resp.user.uid)
-        .set({
+  try {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(user.email, user.password)
+      .then((resp) => {
+        db.collection("users").doc(resp.user.uid).set({
           firstName: user.firstName,
-          lastName: user.lastName
+          lastName: user.lastName,
         });
-    })
-    .then(() => {
-      firebase.auth().currentUser.sendEmailVerification();
-      dispatch({ type: actions.AUTH_SUCCESS });
-    })
-    .catch(err => {
-      dispatch({ type: actions.AUTH_ERROR, payload: err.message });
-    });
+        firebase.auth().currentUser.sendEmailVerification();
+        dispatch({ type: actions.AUTH_SUCCESS });
+      });
+    return null;
+  } catch (err) {
+    dispatch({ type: actions.AUTH_ERROR, payload: err.message });
+    return err.message;
+  }
 };
 
-export const login = user => async (dispatch, getState) => {
+export const login = (user) => async (dispatch, getState) => {
   dispatch({ type: actions.AUTH_STARTED });
   try {
     await firebase.auth().signInWithEmailAndPassword(user.email, user.password);
@@ -40,7 +39,7 @@ export const login = user => async (dispatch, getState) => {
   }
 };
 
-export const verifyEmail = user => async (dispatch, getState) => {
+export const verifyEmail = (user) => async (dispatch, getState) => {
   dispatch({ type: actions.VERIFY_EMAIL_STARTED });
   try {
     await firebase.auth().currentUser.sendEmailVerification();
@@ -50,7 +49,7 @@ export const verifyEmail = user => async (dispatch, getState) => {
   }
 };
 
-export const logout = user => async (dispatch, getState) => {
+export const logout = (user) => async (dispatch, getState) => {
   await firebase.auth().signOut();
   dispatch({ type: actions.LOGOUT });
 };
@@ -59,5 +58,5 @@ export const logout = user => async (dispatch, getState) => {
  * Clean up messages
  */
 export const clean = () => ({
-  type: actions.CLEAN
+  type: actions.CLEAN,
 });

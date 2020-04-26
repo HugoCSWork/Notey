@@ -10,10 +10,10 @@ import {
   RedirectLinkWrapper
 } from "../../../hoc/elements";
 import * as actions from "../../../store/actions/index";
-import Input from "../../../components/UI/Input";
-import Button from "../../../components/UI/Button";
-import Heading from "../../../components/UI/Heading";
-import Message from "../../../components/UI/Message";
+import Input from "../../../components/UI/Input/Input";
+import Button from "../../../components/UI/Button/Button";
+import Heading from "../../../components/UI/Heading/Heading";
+import Message from "../../../components/UI/Message/Message";
 
 const RegisterSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -44,7 +44,6 @@ const Register = ({ register, loading, error, history, cleanUp }) => {
       cleanUp();
     };
   }, [cleanUp]);
-
   return (
     <Formik
       initialValues={{
@@ -56,9 +55,9 @@ const Register = ({ register, loading, error, history, cleanUp }) => {
         confirmPassword: ""
       }}
       validationSchema={RegisterSchema}
-      onSubmit={async values => {
-        await register(values);
-        console.log(loading, error);
+      onSubmit={async (values, { setSubmitting }) => {
+        const val = await register(values);
+        console.log(val);
       }}
     >
       {({ isSubmitting, isValid }) => (
